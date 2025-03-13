@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../styles/AddUniversity.css";
+import { BE_URL } from "../../src/utils/Constants";
+
 
 const AddUniversity: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -38,7 +40,7 @@ const AddUniversity: React.FC = () => {
     }
 
     try {
-      await axios.post("http://localhost:5000/api/universities", formDataToSend, {
+      await axios.post(`${BE_URL}/universities`, formDataToSend, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 

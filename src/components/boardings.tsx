@@ -2,6 +2,8 @@ import React, { ReactNode, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../styles/Boarding.css";
+import { BE_URL } from "../../src/utils/Constants";
+
 
 // Boardings Interface
 interface Boardings {
@@ -22,7 +24,7 @@ const Boardings: React.FC = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/boarding/get")
+      .get(`${BE_URL}/boarding/get`)
       .then((response) => {
         setBoardings(response.data);
       })
@@ -37,7 +39,7 @@ const Boardings: React.FC = () => {
   const confirmDelete = () => {
     if (boardingsIdToDelete !== null) {
       axios
-        .delete(`http://localhost:5000/api/boarding/${boardingsIdToDelete}`)
+        .delete(`${BE_URL}/boarding/${boardingsIdToDelete}`)
         .then(() => {
           setBoardings((prev) => prev.filter((board) => board.board_id !== boardingsIdToDelete));
           setShowModal(false);

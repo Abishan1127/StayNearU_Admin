@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../styles/Room.css";  
+import { BE_URL } from "../../src/utils/Constants";
+
 
 interface Room {
   room_id: number;
@@ -21,7 +23,7 @@ const Room: React.FC = () => {
   // Get Rooms
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/room/all")
+      .get(`${BE_URL}/room/all`)
       .then((response) => {
         const sortedRooms = response.data.sort((a: Room, b: Room) => a.room_id - b.room_id);
         setRooms(sortedRooms);
@@ -33,7 +35,7 @@ const Room: React.FC = () => {
   const deleteRoom = async () => {
     if (itemToDelete) {
       try {
-        await axios.delete(`http://localhost:5000/api/roomsdelete/${itemToDelete.room_id}`);
+        await axios.delete(`${BE_URL}/roomsdelete/${itemToDelete.room_id}`);
         setRooms((prevRooms) => prevRooms.filter((room) => room.room_id !== itemToDelete.room_id));
         setShowConfirmDelete(false);
         setItemToDelete(null);

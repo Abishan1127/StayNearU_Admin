@@ -1,6 +1,8 @@
 import { ReactNode, useEffect, useState } from "react";
 import axios from "axios";
 import "../styles/Event.css";  
+import { BE_URL } from "../../src/utils/Constants";
+
 
 interface Booking {
   [x: string]: ReactNode;
@@ -26,7 +28,7 @@ const Book: React.FC = () => {
   // Fetch bookings from the API
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/book")
+      .get(`${BE_URL}/book`)
       .then((response) => {
 
         
@@ -41,7 +43,7 @@ const Book: React.FC = () => {
   const deleteBooking = async () => {
     if (itemToDelete !== null) {
       try {
-        await axios.delete(`http://localhost:5000/api/bookdelete/${itemToDelete}`);
+        await axios.delete(`${BE_URL}/bookdelete/${itemToDelete}`);
         setBookings((prevBookings) => prevBookings.filter((booking) => booking.id !== itemToDelete));
         setShowConfirmDelete(false);
         setItemToDelete(null);

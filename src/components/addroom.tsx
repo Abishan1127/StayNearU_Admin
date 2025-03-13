@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../styles/AddRoom.css";
+import { BE_URL } from "../../src/utils/Constants";
+
 
 const AddRoom: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -22,7 +24,7 @@ const AddRoom: React.FC = () => {
     e.preventDefault();
 
     try {
-      await axios.post("http://localhost:5000/api/room/add", formData);
+      await axios.post(`${BE_URL}/room/add`, formData);
       alert("Room added successfully!");
       navigate("/rooms"); // Redirect back to the room list
     } catch (error) {

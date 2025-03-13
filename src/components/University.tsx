@@ -2,6 +2,8 @@ import React, { ReactNode, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../styles/University.css";
+import { BE_URL } from "../../src/utils/Constants";
+
 
 // University Interface
 interface University {
@@ -21,7 +23,7 @@ const University: React.FC = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/universities")
+      .get(`${BE_URL}/universities`)
       .then((response) => {
         setUniversities(response.data);
       })
@@ -36,7 +38,7 @@ const University: React.FC = () => {
   const confirmDelete = () => {
     if (universityIdToDelete !== null) {
       axios
-        .delete(`http://localhost:5000/api/universities/${universityIdToDelete}`)
+        .delete(`${BE_URL}/universities/${universityIdToDelete}`)
         .then(() => {
           setUniversities((prev) => prev.filter((uni) => uni.uni_id !== universityIdToDelete));
           setShowModal(false);

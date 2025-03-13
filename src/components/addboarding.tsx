@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../styles/AddBoarding.css";
+import { BE_URL } from "../../src/utils/Constants";
+
 
 const AddBoarding: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -40,7 +42,7 @@ const AddBoarding: React.FC = () => {
     }
 
     try {
-      await axios.post("http://localhost:5000/api/boarding", formDataToSend, {
+      await axios.post(`${BE_URL}/boarding`, formDataToSend, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
